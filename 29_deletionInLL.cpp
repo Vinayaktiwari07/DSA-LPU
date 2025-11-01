@@ -9,7 +9,6 @@ struct Node{
         data = value;
         next = NULL;
     }
-
     
 };
 
