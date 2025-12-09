@@ -13,11 +13,14 @@ struct Node{
     }
 };
 
-void preOrder(Node* root){
+void printLeftViewByPreorder(Node* root, int level, int arr[]){
     if(!root) return;
-    cout << root -> data << " ";
-    preOrder(root -> left);
-    if(left == nullptr) preOrder(root -> right);
+    if(arr[level] == -1){
+        cout << root-> data << " ";
+        arr[level] = 1;
+    }
+    printLeftViewByPreorder(root->left, level+1, arr);
+    printLeftViewByPreorder(root->right, level+1, arr);
 }
 int main() {
     Node* root = new Node(1);
@@ -33,6 +36,9 @@ int main() {
     leftNode -> left = left1;
     leftNode -> right = right1;
 
-    preOrder(root);
+    int arr[100];
+    for(int i=0; i<100; i++) arr[i] = -1;
+
+    printLeftViewByPreorder(root,0,arr);
     return 0;
 }
