@@ -14,18 +14,21 @@ struct Node{
     }
 };
 
-void levelOrder(Node* root){
+void printLeftViewUsingLevelOrder(Node* root){
     queue<Node*> q;
     q.push(root);
 
     while(!q.empty()){
-        Node* node = q.front();
-        q.pop();
+        int size = q.size();
 
-        cout << node->data<<" ";
-
-        if(node->left != nullptr) q.push(node->left);
-        if(node->right != nullptr) q.push(node->right);
+        for(int i=1; i<=size; i++){
+            Node* node = q.front();
+            q.pop();
+    
+            if(i==1)cout << node->data<<" ";
+            if(node->left != nullptr) q.push(node->left);
+            if(node->right != nullptr) q.push(node->right);
+        }
     }
 }
 int main() {
@@ -42,6 +45,6 @@ int main() {
     leftNode -> left = left1;
     leftNode -> right = right1;
 
-    levelOrder(root);
+    printLeftViewUsingLevelOrder(root);
     return 0;
 }
