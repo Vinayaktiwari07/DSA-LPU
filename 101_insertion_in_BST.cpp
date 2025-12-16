@@ -20,16 +20,20 @@ void inOrder(Node* root){
     inOrder(root -> right);
 }
 
-bool searchInBst(Node* root, int target){
-    if(root == nullptr) return false;
-
-    if(root->data == target) return true;
-    else if(root->data < target){
-        return searchInBst(root-> right, target);
+int insertInBst(Node* &root, int key){
+    if(!root){
+        root = new Node(key);
+        return 0;
+    }
+    
+    if(key < root->data){
+        insertInBst(root->left,key);
     }
     else{
-        return searchInBst(root->left, target);
+        insertInBst(root->right,key);
     }
+    
+    // return root;
 }
 int main() {
     Node* root = new Node(10);
@@ -45,9 +49,9 @@ int main() {
     leftNode -> left = left1;
     leftNode -> right = right1;
 
-    inOrder(root);
+    
+    insertInBst(root, 80);
     cout << endl;
-
-    cout << searchInBst(root, 80);
+    inOrder(root);
     return 0;
 }
